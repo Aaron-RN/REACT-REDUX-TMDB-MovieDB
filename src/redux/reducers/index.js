@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import moviesReducer from './movies';
 import filterReducer from './filter';
-import loaderReducer from './loading';
+import loaderReducer from './loader';
 import genresReducer from './genres';
 import modalReducer from './modal';
 

@@ -6,27 +6,23 @@ import thunk from 'redux-thunk';
 import './assets/css/index.css';
 import App from './App';
 
-import rootReducer from './redux/reducers/movies';
-// import { fetchMovieList, fetchGenres } from './actions';
+import rootReducer from './redux/reducers/index';
+import { fetchMovieListBy, fetchGenres } from './redux/actions';
 
 const initialState = {
-  movies: [],
+  movies: { page: 1, total_results: 100, total_pages: 500, results: [] },
   genres: [
     { id: 28, name: 'Action' },
     { id: 12, name: 'Adventure' },
     { id: 16, name: 'Animation' },
-    { id: 35, name: 'Comedy' },
-    { id: 80, name: 'Crime' },
-    { id: 27, name: 'Horor' },
-    { id: 36, name: 'History' },
   ],
   status: { isLoading: false, errors: [] },
   modal: { showModal: false, type: 'notes', selectedObject: {} },
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
-// store.dispatch(fetchMovieList());
-// store.dispatch(fetchGenres());
+store.dispatch(fetchMovieListBy()); // Get all popular movies
+store.dispatch(fetchGenres());
 
 ReactDOM.render(
   <Provider store={store}>
