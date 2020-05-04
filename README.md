@@ -1,2 +1,2 @@
-# REACT-REDUX-Goodreads-BookCMS
+# REACT-REDUX-TMDB-MovieDB
 Microverse Capstone project
