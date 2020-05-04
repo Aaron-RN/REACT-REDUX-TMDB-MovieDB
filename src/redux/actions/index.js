@@ -27,6 +27,7 @@ const fetchRequestSuccess = response => ({
   type: FETCH_REQUEST_SUCCESS,
   response,
 });
+
 const fetchRequestFailure = (response, form = '') => ({
   type: FETCH_REQUEST_FAILURE,
   response,
@@ -70,7 +71,6 @@ const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR) => dispatch 
       dispatch(fetchMovieListSuccess(response.data));
     })
     .catch(error => {
-      console.log(error);
       dispatch(fetchRequestFailure(error.response.data.status_message));
     });
 };

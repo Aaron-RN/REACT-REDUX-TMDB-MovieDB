@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import MovieList from './components/functional/movieList';
 import logo from './assets/images/logo.svg';
 import './assets/css/App.css';
 
@@ -12,7 +13,7 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
+        <nav className="container">
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -25,30 +26,19 @@ function App() {
             </li>
           </ul>
         </nav>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-        <Switch>
-          <Route path="/movies">
-          </Route>
-          <Route path="/genres">
-          </Route>
-          <Route path="/">
-          </Route>
-        </Switch>
+        <main className="App">
+          <div className="App-header">
+            <Switch>
+              <Route path="/movies">
+              </Route>
+              <Route path="/genres">
+              </Route>
+              <Route path="/">
+                <MovieList />
+              </Route>
+            </Switch>
+          </div>
+        </main>
       </div>
     </Router>
   );

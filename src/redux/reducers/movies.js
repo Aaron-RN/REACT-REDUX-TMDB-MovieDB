@@ -1,6 +1,6 @@
 import { FETCH_MOVIELIST } from '../actions/index';
 
-const moviesReducer = (state = { page: 1, total_results: 100, total_pages: 500, results: [] }, action) => {
+const moviesReducer = (state = { }, action) => {
   switch (action.type) {
     case FETCH_MOVIELIST:
       return {

@@ -16,6 +16,7 @@ const initialState = {
     { id: 12, name: 'Adventure' },
     { id: 16, name: 'Animation' },
   ],
+  filter: 'All',
   status: { isLoading: false, errors: [] },
   modal: { showModal: false, type: 'notes', selectedObject: {} },
 };

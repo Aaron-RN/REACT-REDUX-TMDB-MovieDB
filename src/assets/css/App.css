@@ -1,34 +1,85 @@
+html { box-sizing: border-box; }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  transition-duration: 0.25s;
+}
+
+body {
+  overflow: auto;
+  overflow-x: hidden;
+  font-size: calc(10px + 2vmin);
+  color: #FFF;
+  background-color: #1e2331;
+}
+a { color: #ffefa7; }
+
+.container { 
+  max-width: 1400px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.box-shadow {
+  box-shadow: 0px 42px 20px #211f24;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.App-body {
+  background-color: #1e2331;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+button { cursor: pointer ;}
+button:disabled {
+  color: #CCC;
+  cursor: not-allowed;  
 }
 
-@keyframes App-logo-spin {
+.errors {
+  font-size: 16px;
+  color: #D22;
+  text-align: left;
+  padding: 1em;
+}
+
+.loader {
+  width: 180px;
+  height: 180px;
+  border: 18px solid #f3f3f3;
+  border-radius: 50%;
+  border-right: 18px solid #85e95d;
+  animation: logo-spin infinite 20s linear;
+}
+
+/* Small screens less than 720px */
+@media screen and (max-width: 720px) {
+  .container { max-width: none; }
+  .hide-sm { display: none; }
+  .show-md { display: none; }
+}
+
+/* Medium devices (landscape tablets, 720px - 1024px) */
+@media only screen and (min-width: 721px) and (max-width: 1023px) {
+  .show-sm { display: none; }
+  .hide-md { display: none; }
+}
+
+/* Large devices (laptops/desktops, 1024px and up) */
+@media only screen and (min-width: 1024px) {
+  .show-sm { display: none; }
+  .show-md { display: none; }
+}
+
+@keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
