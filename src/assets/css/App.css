@@ -60,6 +60,28 @@ button:disabled {
   animation: logo-spin infinite 20s linear;
 }
 
+/* ScrollBar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1e2331; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #414141; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  cursor: grab;
+}
+
 /* Small screens less than 720px */
 @media screen and (max-width: 720px) {
   .container { max-width: none; }

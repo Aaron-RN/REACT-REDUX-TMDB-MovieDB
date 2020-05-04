@@ -3,6 +3,7 @@
   display: flex;
   width: 100vw;
   /* min-height: 86vh; */
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
+  padding: 12px;
+  cursor: pointer;
 }
