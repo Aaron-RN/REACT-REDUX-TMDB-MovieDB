@@ -30,10 +30,12 @@ a { color: #ffefa7; }
 }
 
 .App {
-  text-align: center;
+  min-height: 98vh;
+  /* border: 1px solid salmon; */
 }
 
 .App-body {
+  display: block;
   background-color: #1e2331;
   color: white;
 }
@@ -49,6 +51,21 @@ button:disabled {
   color: #D22;
   text-align: left;
   padding: 1em;
+}
+
+.font-header {
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.text-white {
+  color: #FFF;
+}
+.text-center {
+  text-align: center;
+}
+.center {
+  margin: auto;
 }
 
 .loader {

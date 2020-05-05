@@ -11,3 +11,26 @@
 .movies-section::-webkit-scrollbar {
   display: none;
 }
+
+.pagination { text-align: center; }
+.pagination div { display: inline-block; }
+.pagination button {
+  display: inline-block;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid black;
+  border-radius: 0.2em;
+}
+
+.pagination button:nth-child(1) {
+  color: #b3b3b3;
+  margin-right: 12px;
+}
+
+.pagination div:nth-child(2) {
+  margin-right: 12px;
+}
+
+.pagination button:nth-child(3) {
+  color: #ffffff;
+}

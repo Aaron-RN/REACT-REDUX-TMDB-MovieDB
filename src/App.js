@@ -13,7 +13,7 @@ import './assets/css/App.css';
 function App() {
   return (
     <Router>
-      <div>
+      <div className="App">
         <nav className="container">
           <ul>
             <li>
@@ -27,18 +27,16 @@ function App() {
             </li>
           </ul>
         </nav>
-        <main className="App">
-          <div className="App-header">
-            <Switch>
-              <Route path="/movies">
-              </Route>
-              <Route path="/genres">
-              </Route>
-              <Route path="/">
-                <MovieList />
-              </Route>
-            </Switch>
-          </div>
+        <main className="App-body">
+          <Switch>
+            <Route path="/movies">
+            </Route>
+            <Route path="/genres">
+            </Route>
+            <Route path="/">
+              <MovieList />
+            </Route>
+          </Switch>
         </main>
       </div>
     </Router>

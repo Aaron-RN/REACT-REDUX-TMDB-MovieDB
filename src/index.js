@@ -10,7 +10,7 @@ import rootReducer from './redux/reducers/index';
 import { fetchMovieListBy, fetchGenres } from './redux/actions';
 
 const initialState = {
-  movies: { page: 1, total_results: 100, total_pages: 500, results: [] },
+  movies: { page: 1, total_results: 100, total_pages: 500, searchBy: '', results: [] },
   genres: [
     { id: 28, name: 'Action' },
     { id: 12, name: 'Adventure' },

@@ -3,10 +3,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Movie from '../presentational/movie';
 import '../../assets/css/movieList.css';
+import { fetchMovieListBy } from '../../redux/actions/index';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
-const MovieList = ({ movies, genres, filter, status }) => {
+
+
+const MovieList = ({ movies, genres, filter, status, fetchMovieListBy }) => {
   // const filteredMovies = (filter !== 'All') ? movies.results.filter(book => movies.genre === filter) : movies;
   const { isLoading } = status;
+  const { page, total_pages, api_URL, search_by } = movies;
+  const moviesContainer = React.useRef(null);
+  const prevPage = (page - 1) <= 0 ? 1 : (page - 1);
+  const nextPage = (page + 1) > total_pages? total_pages : (page + 1);
+
   const scrollOnHover = (element) => {
     element.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
   }
@@ -19,14 +29,30 @@ const MovieList = ({ movies, genres, filter, status }) => {
       </div>
     )
     : (
-      <div className="movies-section">
-        {movies.results.map(movie => (
-          <Movie
-            movie={movie}
-            key={movie.id + movie.title}
-            scrollOnHover={scrollOnHover}
-          />
-        ))}
+      <div>
+        <div className="text-center font-header">Movies sorted by {search_by}</div>
+        <div className="pagination">
+          <button type="button"
+            title="Previous 20 movies"
+            onClick={() => fetchMovieListBy(api_URL, search_by, prevPage)}>
+              Prev
+          </button>
+          <div>{ page }</div>
+          <button type="button"
+            title="Next 20 movies"
+            onClick={() => fetchMovieListBy(api_URL, search_by, nextPage)}>
+              Next
+          </button>
+        </div>
+        <div ref={moviesContainer} className="movies-section">
+          {movies.results.map(movie => (
+            <Movie
+              movie={movie}
+              key={movie.id + movie.title}
+              scrollOnHover={scrollOnHover}
+            />
+          ))}
+        </div>
       </div>
     );
 
@@ -42,6 +68,7 @@ MovieList.propTypes = {
   genres: PropTypes.instanceOf(Array).isRequired,
   filter: PropTypes.string,
   status: PropTypes.instanceOf(Object).isRequired,
+  fetchMovieListBy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -51,13 +78,10 @@ const mapStateToProps = state => ({
   status: state.status,
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   changeFilter: category => {
-//     dispatch(changeFilter(category));
-//   },
-//   toggleModal: (modalType, selectedObject) => {
-//     dispatch(toggleModal(modalType, selectedObject));
-//   },
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchMovieListBy: (API_GET_MOVIE_BY, searchBy, page) => {
+    dispatch(fetchMovieListBy(API_GET_MOVIE_BY, searchBy, page));
+  },
+});
 
-export default connect(mapStateToProps, null)(MovieList);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieList);
