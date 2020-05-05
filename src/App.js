@@ -6,9 +6,11 @@ import {
   Link
 } from "react-router-dom";
 import MovieList from './components/functional/movieList';
-import logo from './assets/images/logo.svg';
 import './assets/css/reset_css.css';
 import './assets/css/App.css';
+import { API_GET_MOVIE_POPULAR, API_GET_MOVIE_TOP_RATED, API_GET_MOVIE_UPCOMING,
+  API_GET_MOVIE_IN_THEATRES,
+} from './redux/actions/index';
 
 function App() {
   return (
@@ -16,9 +18,12 @@ function App() {
       <div className="App">
         <nav className="container">
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
+            <ul className="horizontal-list">
+              <li><Link to="/movies/popular">Popular <i className="fas fa-film"></i></Link></li>
+              <li><Link to="/movies/top_rated">Top Rated <i className="fas fa-film"></i></Link></li>
+              <li><Link to="/movies/upcoming">Upcoming <i className="fas fa-film"></i></Link></li>
+              <li><Link to="/movies/now_playing">Recent<i className="fas fa-film"></i></Link></li>
+            </ul>
             <li>
               <Link to="/genres">Genres</Link>
             </li>
@@ -26,15 +31,25 @@ function App() {
               <Link to="/movies">Movies</Link>
             </li>
           </ul>
+          <div className="logo" />
         </nav>
         <main className="App-body">
           <Switch>
-            <Route path="/movies">
+            <Route exact path="/movies">
             </Route>
-            <Route path="/genres">
+            <Route exact path="/genres">
             </Route>
-            <Route path="/">
-              <MovieList />
+            <Route exact path="/movies/popular">
+              <MovieList apiSearch={{apiURL: API_GET_MOVIE_POPULAR, searchBy: 'Popularity'}} />
+            </Route>
+            <Route exact path="/movies/top_rated">
+              <MovieList apiSearch={{apiURL: API_GET_MOVIE_TOP_RATED, searchBy: 'Top Rated'}} />
+            </Route>
+            <Route exact path="/movies/upcoming">
+              <MovieList apiSearch={{apiURL: API_GET_MOVIE_UPCOMING, searchBy: 'Upcoming'}} />
+            </Route>
+            <Route exact path="/movies/now_playing">
+              <MovieList apiSearch={{apiURL: API_GET_MOVIE_IN_THEATRES, searchBy: 'Now Playing'}} />
             </Route>
           </Switch>
         </main>

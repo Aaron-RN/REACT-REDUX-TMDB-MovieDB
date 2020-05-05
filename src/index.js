@@ -7,7 +7,7 @@ import './assets/css/index.css';
 import App from './App';
 
 import rootReducer from './redux/reducers/index';
-import { fetchMovieListBy, fetchGenres } from './redux/actions';
+import { fetchGenres } from './redux/actions';
 
 const initialState = {
   movies: { page: 1, total_results: 100, total_pages: 500, searchBy: '', results: [] },
@@ -22,7 +22,6 @@ const initialState = {
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
-store.dispatch(fetchMovieListBy()); // Get all popular movies
 store.dispatch(fetchGenres());
 
 ReactDOM.render(

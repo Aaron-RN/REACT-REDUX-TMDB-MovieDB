@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Movie from '../presentational/movie';
 import '../../assets/css/movieList.css';
 import { fetchMovieListBy } from '../../redux/actions/index';
-import smoothscroll from 'smoothscroll-polyfill';
-smoothscroll.polyfill();
 
+const MovieList = ({ apiSearch, movies, genres, filter, status, fetchMovieListBy }) => {
+  useEffect(() => {
+    fetchMovieListBy(apiSearch.apiURL, apiSearch.searchBy );
+  }, [apiSearch.apiURL, apiSearch.searchBy, fetchMovieListBy]);
 
-
-const MovieList = ({ movies, genres, filter, status, fetchMovieListBy }) => {
   // const filteredMovies = (filter !== 'All') ? movies.results.filter(book => movies.genre === filter) : movies;
   const { isLoading } = status;
   const { page, total_pages, api_URL, search_by } = movies;
@@ -68,6 +68,7 @@ MovieList.propTypes = {
   genres: PropTypes.instanceOf(Array).isRequired,
   filter: PropTypes.string,
   status: PropTypes.instanceOf(Object).isRequired,
+  apiSearch: PropTypes.instanceOf(Object).isRequired,
   fetchMovieListBy: PropTypes.func.isRequired,
 };
 

@@ -29,8 +29,23 @@ a { color: #ffefa7; }
   box-shadow: 0px 42px 20px #211f24;
 }
 
+.logo {
+  position: absolute;
+  top:0;
+  right:0;
+  background-image: url(../images/logo.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 80px;
+  height: 80px;
+  margin-left: auto;
+  animation: logo-spin infinite 20s linear;
+}
+
 .App {
   min-height: 98vh;
+  overflow: hidden;
   /* border: 1px solid salmon; */
 }
 
@@ -45,6 +60,11 @@ button:disabled {
   color: #CCC;
   cursor: not-allowed;  
 }
+
+.horizontal-list {
+  display: flex;
+}
+.horizontal-list div { padding: 8px; }
 
 .errors {
   font-size: 16px;
