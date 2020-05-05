@@ -63,8 +63,12 @@ button:disabled {
 
 .horizontal-list {
   display: flex;
+  flex-wrap: wrap;
 }
 .horizontal-list div { padding: 8px; }
+a {
+  text-decoration: none !important;
+}
 
 .errors {
   font-size: 16px;

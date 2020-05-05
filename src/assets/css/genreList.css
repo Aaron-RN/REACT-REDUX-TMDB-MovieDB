@@ -1,0 +1,18 @@
+.genre-list {
+  margin-top: 1em;
+}
+
+.selected-genres {
+  padding: 12px;
+}
+
+.genre {
+  color: #FFF;
+  background-color: #111;
+  padding: 6px 12px;
+  margin: 6px;
+  border: 1px solid #333;
+}
+.genre:hover {
+  transform: scale(1.1);
+}

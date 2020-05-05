@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import MovieList from './components/functional/movieList';
+import GenreList from './components/functional/genresList';
 import './assets/css/reset_css.css';
 import './assets/css/App.css';
 import { API_GET_MOVIE_POPULAR, API_GET_MOVIE_TOP_RATED, API_GET_MOVIE_UPCOMING,
@@ -18,27 +19,24 @@ function App() {
       <div className="App">
         <nav className="container">
           <ul>
-            <ul className="horizontal-list">
-              <li><Link to="/movies/popular">Popular <i className="fas fa-film"></i></Link></li>
-              <li><Link to="/movies/top_rated">Top Rated <i className="fas fa-film"></i></Link></li>
-              <li><Link to="/movies/upcoming">Upcoming <i className="fas fa-film"></i></Link></li>
-              <li><Link to="/movies/now_playing">Recent<i className="fas fa-film"></i></Link></li>
-            </ul>
+            <div className="horizontal-list">
+              <div><Link to="/movies/popular">Popular<i className="fas fa-film"></i></Link></div>
+              <div><Link to="/movies/top_rated">Top Rated<i className="fas fa-film"></i></Link></div>
+              <div><Link to="/movies/upcoming">Upcoming<i className="fas fa-film"></i></Link></div>
+              <div><Link to="/movies/now_playing">Recent<i className="fas fa-film"></i></Link></div>
+            </div>
             <li>
               <Link to="/genres">Genres</Link>
-            </li>
-            <li>
-              <Link to="/movies">Movies</Link>
             </li>
           </ul>
           <div className="logo" />
         </nav>
         <main className="App-body">
           <Switch>
-            <Route exact path="/movies">
-            </Route>
             <Route exact path="/genres">
+              <GenreList />
             </Route>
+            <Route exact path="/movies/genres" component={MovieList} />
             <Route exact path="/movies/popular">
               <MovieList apiSearch={{apiURL: API_GET_MOVIE_POPULAR, searchBy: 'Popularity'}} />
             </Route>

@@ -8,8 +8,11 @@ const API_GET_MOVIE_POPULAR = 'movie/popular';
 const API_GET_MOVIE_TOP_RATED = 'movie/top_rated';
 const API_GET_MOVIE_UPCOMING = 'movie/upcoming';
 const API_GET_MOVIE_IN_THEATRES = 'movie/now_playing';
+const API_GET_MOVIE_BY = 'discover/movie';
+
 const API_PARAMS_LANG_EN = '&language=en-US';
 const API_PARAMS_PAGE = '&page=';
+const API_PARAMS_GENRE = '&with_genres='
 
 const FETCH_REQUEST = 'FETCH_REQUEST';
 const FETCH_REQUEST_SUCCESS = 'FETCH_REQUEST_SUCCESS';
@@ -35,11 +38,12 @@ const fetchRequestFailure = (response, form = '') => ({
   form,
 });
 
-const fetchMovieListSuccess = (movies, apiURL, searchBy) => ({
+const fetchMovieListSuccess = (movies, apiURL, searchBy, genreIDS) => ({
   type: FETCH_MOVIELIST,
   response: movies,
   apiURL,
   searchBy,
+  genreIDS,
 });
 
 const fetchGenresSuccess = genres => ({
@@ -66,12 +70,15 @@ const refreshModal = selectedObject => ({
 // Asyncronous Requests to Backend API
 
 // MovieList Populate List
-const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = 'Popularity', page = '1') => dispatch => {
+const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = 'Popularity', page = '1', genre_ids = []) => dispatch => {
+  console.log(genre_ids);
+  const genreParams = genre_ids ? `${API_PARAMS_GENRE}${genre_ids.join('%2C')}` : '';
+  console.log(genreParams)
   dispatch(fetchRequest());
-  axios.get(`${URL}${API_GET_MOVIE_BY}${API_KEY}${API_PARAMS_LANG_EN}${API_PARAMS_PAGE}${page}`)
+  axios.get(`${URL}${API_GET_MOVIE_BY}${API_KEY}${API_PARAMS_LANG_EN}${API_PARAMS_PAGE}${page}${genreParams}`)
     .then(response => {
       dispatch(fetchRequestSuccess(response.statusText));
-      dispatch(fetchMovieListSuccess(response.data, API_GET_MOVIE_BY, searchBy));
+      dispatch(fetchMovieListSuccess(response.data, API_GET_MOVIE_BY, searchBy, genre_ids));
     })
     .catch(error => {
       dispatch(fetchRequestFailure(error.response.data.status_message));
@@ -96,7 +103,7 @@ export {
   FETCH_REQUEST, FETCH_REQUEST_SUCCESS, FETCH_REQUEST_FAILURE,
   TOGGLE_MODAL, REFRESH_MODAL,
   API_GET_MOVIE_POPULAR, API_GET_MOVIE_TOP_RATED, API_GET_MOVIE_UPCOMING,
-  API_GET_MOVIE_IN_THEATRES,
+  API_GET_MOVIE_IN_THEATRES, API_GET_MOVIE_BY,
   changeFilter, fetchMovieListBy, fetchGenres, 
   toggleModal, refreshModal,
 };
