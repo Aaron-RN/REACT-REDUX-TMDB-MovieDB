@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import MovieList from './components/functional/movieList';
 import logo from './assets/images/logo.svg';
+import './assets/css/reset_css.css';
 import './assets/css/App.css';
 
 function App() {

@@ -6,9 +6,11 @@ import '../../assets/css/movieList.css';
 
 const MovieList = ({ movies, genres, filter, status }) => {
   // const filteredMovies = (filter !== 'All') ? movies.results.filter(book => movies.genre === filter) : movies;
-  console.log(movies);
-
   const { isLoading } = status;
+  const scrollOnHover = (element) => {
+    element.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+  }
+  
   const renderMain = isLoading
     ? (
       <div className="text-center">
@@ -22,15 +24,13 @@ const MovieList = ({ movies, genres, filter, status }) => {
           <Movie
             movie={movie}
             key={movie.id + movie.title}
+            scrollOnHover={scrollOnHover}
           />
         ))}
       </div>
     );
-  return (
-    <div className="movie-list">
-      {renderMain}
-    </div>
-  );
+
+  return renderMain;
 }
 
 MovieList.defaultProps = {
