@@ -82,10 +82,6 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
     (
       <Redirect push to={{
         pathname: `/movie/${selectedMovie.id}`,
-        route_state: {
-          selectedMovie,
-          movies,
-        }
       }} />
     );
 }
