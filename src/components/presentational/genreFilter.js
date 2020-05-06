@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import '../assets/css/CategoryFilter.css';
+// import '../assets/css/genreFilter.css';
 
 const GenreFilter = ({
   changeFilter, genres, filterSelected,

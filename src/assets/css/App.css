@@ -104,6 +104,8 @@ a {
   animation: logo-spin infinite 20s linear;
 }
 
+.hide { display: none; }
+
 /* ScrollBar */
 /* width */
 ::-webkit-scrollbar {

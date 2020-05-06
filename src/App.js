@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import MovieList from './components/functional/movieList';
-import MoviePage from './components/presentational/moviePage';
+import MoviePage from './components/functional/moviePage';
 import GenreList from './components/functional/genresList';
 import './assets/css/reset_css.css';
 import './assets/css/App.css';

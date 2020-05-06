@@ -16,6 +16,26 @@
   transform: scale(1.1);
 }
 
+.selected {
+  border: 2px solid #ffc74f;
+}
+.selectionText {
+  color: black;
+  background-color: #ffc74f;
+  display: inline-block;
+  position: absolute;
+  padding: 12px;
+  top:50%;
+  left:50%;
+  font-size: 18px;
+  text-align: center;
+  z-index: 12;
+  transform: translateX(-50%);
+  font-weight: bold;
+  text-transform: uppercase;
+  mix-blend-mode: screen; /* This makes the cutout text possible */
+
+}
 .movie .poster-container {
   position: relative;
   width: 100%;

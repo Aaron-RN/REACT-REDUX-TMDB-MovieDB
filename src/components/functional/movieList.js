@@ -14,12 +14,17 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
   const apiSearchQuery = apiSearch ? apiSearch : location.route_state ? location.route_state : movies;
 
   useEffect(() => {
+    if (selectedMovie.element) {
+      selectedMovie.element.classList.toggle('selected');
+      selectedMovie.textElement.classList.toggle('hide');
+      return;
+    }
     if (apiSearchQuery.searchBy === 'Similarity') {
       fetchSimilarMovies(apiSearchQuery.movieID);
     } else {
       fetchMovieListBy(apiSearchQuery.apiURL, apiSearchQuery.searchBy, '1', apiSearchQuery.genreIDs);
     }
-  }, [apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID, apiSearchQuery.searchBy, fetchMovieListBy]);
+  }, [apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID, apiSearchQuery.searchBy, fetchMovieListBy, fetchSimilarMovies, selectedMovie]);
 
   const filteredMovies = (filter !== 'All') ? movies.results.filter(movie => movie.genre_ids.includes(parseInt(filter, 10))) : movies.results;
   const { isLoading } = status;
@@ -35,10 +40,15 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
     element.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
   };
 
-  const movieDetails = (element, movie) => {
+  const movieDetails = (element, textElement, movie) => {
     scrollOnHover(element);
-    if (movie !== selectedMovie) {selectMovie(movie); }
+    if (selectedMovie.element && selectedMovie.textElement) {
+      selectedMovie.element.classList.remove('selected');
+      selectedMovie.textElement.classList.add('hide');
+    }
+    if (movie.title !== selectedMovie.title) { selectMovie({...movie, element: element.current, textElement: textElement.current}); }
     else {
+      console.log('should redirect');
       gotoMoviePage(true);
     }
   };
