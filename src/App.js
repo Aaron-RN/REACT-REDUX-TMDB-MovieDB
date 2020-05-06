@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import MovieList from './components/functional/movieList';
+import MoviePage from './components/presentational/moviePage';
 import GenreList from './components/functional/genresList';
 import './assets/css/reset_css.css';
 import './assets/css/App.css';
@@ -33,10 +34,12 @@ function App() {
         </nav>
         <main className="App-body">
           <Switch>
-            <Route exact path="/genres">
-              <GenreList />
-            </Route>
+            <Route exact path="/genres" component={GenreList} />
             <Route exact path="/movies/genres" component={MovieList} />
+            <Route exact path="/movie/:id" component={MoviePage} />
+            <Route exact path="/">
+              <MovieList apiSearch={{apiURL: API_GET_MOVIE_POPULAR, searchBy: 'Popularity'}} />
+            </Route>
             <Route exact path="/movies/popular">
               <MovieList apiSearch={{apiURL: API_GET_MOVIE_POPULAR, searchBy: 'Popularity'}} />
             </Route>

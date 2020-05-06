@@ -71,9 +71,7 @@ const refreshModal = selectedObject => ({
 
 // MovieList Populate List
 const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = 'Popularity', page = '1', genre_ids = []) => dispatch => {
-  console.log(genre_ids);
   const genreParams = genre_ids ? `${API_PARAMS_GENRE}${genre_ids.join('%2C')}` : '';
-  console.log(genreParams)
   dispatch(fetchRequest());
   axios.get(`${URL}${API_GET_MOVIE_BY}${API_KEY}${API_PARAMS_LANG_EN}${API_PARAMS_PAGE}${page}${genreParams}`)
     .then(response => {
