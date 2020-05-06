@@ -9,6 +9,9 @@ html { box-sizing: border-box; }
 * {
   transition-duration: 0.25s;
 }
+nav {
+  margin-bottom: 1em;
+}
 
 body {
   overflow: auto;
@@ -125,7 +128,7 @@ a {
 
 /* Small screens less than 720px */
 @media screen and (max-width: 720px) {
-  .container { max-width: none; }
+  .container { max-width: none; padding-left: 0; padding-right: 0; }
   .hide-sm { display: none; }
   .show-md { display: none; }
 }

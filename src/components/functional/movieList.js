@@ -4,17 +4,21 @@ import { Redirect  } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Movie from '../presentational/movie';
 import '../../assets/css/movieList.css';
-import { fetchMovieListBy } from '../../redux/actions/index';
+import { fetchMovieListBy, fetchSimilarMovies } from '../../redux/actions/index';
 
-const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchMovieListBy }) => {
+const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchMovieListBy, fetchSimilarMovies }) => {
   const [selectedMovie, selectMovie] = useState({});
   const [moviePage, gotoMoviePage] = useState(false);
 
   const apiSearchQuery = apiSearch ? apiSearch : location.route_state ? location.route_state : movies;
 
   useEffect(() => {
-    fetchMovieListBy(apiSearchQuery.apiURL, apiSearchQuery.searchBy, '1', apiSearchQuery.genreIDs);
-  }, [apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.searchBy, fetchMovieListBy]);
+    if (apiSearchQuery.searchBy === 'Similarity') {
+      fetchSimilarMovies(apiSearchQuery.movieID);
+    } else {
+      fetchMovieListBy(apiSearchQuery.apiURL, apiSearchQuery.searchBy, '1', apiSearchQuery.genreIDs);
+    }
+  }, [apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID, apiSearchQuery.searchBy, fetchMovieListBy]);
 
   // const filteredMovies = (filter !== 'All') ? movies.results.filter(movie => movie.genre === filter) : movies;
   const { isLoading } = status;
@@ -100,6 +104,7 @@ MovieList.propTypes = {
   status: PropTypes.instanceOf(Object).isRequired,
   apiSearch: PropTypes.instanceOf(Object),
   fetchMovieListBy: PropTypes.func.isRequired,
+  fetchSimilarMovies: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -112,6 +117,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchMovieListBy: (API_GET_MOVIE_BY, searchBy, page, genre_ids) => {
     dispatch(fetchMovieListBy(API_GET_MOVIE_BY, searchBy, page, genre_ids));
+  },
+  fetchSimilarMovies: (movieID, searchBy, page) => {
+    dispatch(fetchSimilarMovies(movieID, searchBy, page));
   },
 });
 

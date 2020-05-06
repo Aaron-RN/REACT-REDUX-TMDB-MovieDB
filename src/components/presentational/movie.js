@@ -5,16 +5,17 @@ import '../../assets/css/movie.css';
 
 
 const Movie = ({ movie, movieDetails }) => {
-  const poster_image = `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`;
-  const imageToUse = movie.poster_path === null ? `url(${noPoster})` : poster_image;
+  const posterImage = `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`;
+  const imageToUse = movie.poster_path === null ? `url(${noPoster})` : posterImage;
   const showTitle = movie.poster_path === null ? movie.title : '';
   const selectedMovie = React.useRef(null);
 
   return (
     <div ref={selectedMovie}
       className="movie"
-      onClick={ () => {movieDetails(selectedMovie, movie)}}>
-        <div className="poster-container">
+      onClick={ () => {movieDetails(selectedMovie, movie)}}
+    >
+      <div className="poster-container">
         <div className="bg" title={showTitle} style={{backgroundImage: imageToUse}}></div>
       </div>
     </div>

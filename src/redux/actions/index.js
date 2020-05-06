@@ -8,6 +8,7 @@ const API_GET_MOVIE_POPULAR = 'movie/popular';
 const API_GET_MOVIE_TOP_RATED = 'movie/top_rated';
 const API_GET_MOVIE_UPCOMING = 'movie/upcoming';
 const API_GET_MOVIE_IN_THEATRES = 'movie/now_playing';
+const API_GET_MOVIE_SIMILAR = movie_id => `movie/${movie_id}/similar`;
 const API_GET_MOVIE_BY = 'discover/movie';
 
 const API_PARAMS_LANG_EN = '&language=en-US';
@@ -83,6 +84,19 @@ const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = '
     });
 };
 
+// MovieList Populate List
+const fetchSimilarMovies = (movieID, searchBy = 'Similarity', page = '1') => dispatch => {
+  dispatch(fetchRequest());
+  axios.get(`${URL}${API_GET_MOVIE_SIMILAR(movieID)}${API_KEY}${API_PARAMS_LANG_EN}${API_PARAMS_PAGE}${page}`)
+    .then(response => {
+      dispatch(fetchRequestSuccess(response.statusText));
+      dispatch(fetchMovieListSuccess(response.data, API_GET_MOVIE_SIMILAR(movieID), searchBy));
+    })
+    .catch(error => {
+      dispatch(fetchRequestFailure(error.response.data.status_message));
+    });
+};
+
 // Genres Populate List
 const fetchGenres = () => dispatch => {
   dispatch(fetchRequest());
@@ -102,6 +116,6 @@ export {
   TOGGLE_MODAL, REFRESH_MODAL,
   API_GET_MOVIE_POPULAR, API_GET_MOVIE_TOP_RATED, API_GET_MOVIE_UPCOMING,
   API_GET_MOVIE_IN_THEATRES, API_GET_MOVIE_BY,
-  changeFilter, fetchMovieListBy, fetchGenres, 
+  changeFilter, fetchMovieListBy, fetchSimilarMovies, fetchGenres, 
   toggleModal, refreshModal,
 };

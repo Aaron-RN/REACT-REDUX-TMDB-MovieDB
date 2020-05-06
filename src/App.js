@@ -37,6 +37,7 @@ function App() {
             <Route exact path="/genres" component={GenreList} />
             <Route exact path="/movies/genres" component={MovieList} />
             <Route exact path="/movie/:id" component={MoviePage} />
+            <Route exact path="/movies/:id/similar" component={MovieList} />
             <Route exact path="/">
               <MovieList apiSearch={{apiURL: API_GET_MOVIE_POPULAR, searchBy: 'Popularity'}} />
             </Route>
