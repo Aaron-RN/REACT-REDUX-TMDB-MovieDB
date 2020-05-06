@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect  } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Movie from '../presentational/movie';
+import GenreFilter from '../presentational/genreFilter';
 import '../../assets/css/movieList.css';
-import { fetchMovieListBy, fetchSimilarMovies } from '../../redux/actions/index';
+import { fetchMovieListBy, fetchSimilarMovies, changeFilter } from '../../redux/actions/index';
 
-const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchMovieListBy, fetchSimilarMovies }) => {
+const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchMovieListBy, fetchSimilarMovies, changeFilter }) => {
   const [selectedMovie, selectMovie] = useState({});
   const [moviePage, gotoMoviePage] = useState(false);
 
@@ -20,7 +21,7 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
     }
   }, [apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID, apiSearchQuery.searchBy, fetchMovieListBy]);
 
-  // const filteredMovies = (filter !== 'All') ? movies.results.filter(movie => movie.genre === filter) : movies;
+  const filteredMovies = (filter !== 'All') ? movies.results.filter(movie => movie.genre_ids.includes(parseInt(filter, 10))) : movies.results;
   const { isLoading } = status;
   const { page, total_pages, apiURL, searchBy, genreIDs } = movies;
   const moviesContainer = React.useRef(null);
@@ -29,7 +30,6 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
 
   const scrollHorizontal = (event) => {
     moviesContainer.current.scrollLeft += event.deltaY;
-    // if(event.deltaY > 0) this.style.fontSize = "25px";
   }
   const scrollOnHover = (element) => {
     element.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
@@ -66,8 +66,9 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
               Next
           </button>
         </div>
+        <GenreFilter filterSelected={filter} genres={genres} changeFilter={changeFilter} />
         <div ref={moviesContainer} className="movies-section" onWheel={scrollHorizontal}>
-          {movies.results.map(movie => (
+          {filteredMovies.map(movie => (
             <Movie
               movie={movie}
               key={movie.id + movie.title}
@@ -96,11 +97,15 @@ MovieList.propTypes = {
   location: PropTypes.instanceOf(Object),
   movies: PropTypes.instanceOf(Object).isRequired,
   genres: PropTypes.instanceOf(Array).isRequired,
-  filter: PropTypes.string,
+  filter:  PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   status: PropTypes.instanceOf(Object).isRequired,
   apiSearch: PropTypes.instanceOf(Object),
   fetchMovieListBy: PropTypes.func.isRequired,
   fetchSimilarMovies: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -116,6 +121,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchSimilarMovies: (movieID, searchBy, page) => {
     dispatch(fetchSimilarMovies(movieID, searchBy, page));
+  },
+  changeFilter: (genre) => {
+    dispatch(changeFilter(genre));
   },
 });
 

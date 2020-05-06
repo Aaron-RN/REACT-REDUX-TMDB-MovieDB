@@ -18,7 +18,6 @@ const initialState = {
   ],
   filter: 'All',
   status: { isLoading: false, errors: [] },
-  modal: { showModal: false, type: 'notes', selectedObject: {} },
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
