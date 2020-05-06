@@ -10,17 +10,24 @@ html { box-sizing: border-box; }
   transition-duration: 0.25s;
 }
 nav {
-  margin-bottom: 1em;
+  font-family: 'Oswald', sans-serif;
+  padding: 0.8em;
+  margin-bottom: 1.4em;
+  /* border-bottom: 1px solid #444; */
+  /* border-radius: 0.25em; */
+  background-color: #191d27;
+  box-shadow: 0px 6px 22px #191d27;
 }
 
+
 body {
+  font-family: 'Jost', sans-serif;
   overflow: auto;
   overflow-x: hidden;
   font-size: calc(10px + 2vmin);
   color: #FFF;
   background-color: #1e2331;
 }
-a { color: #ffefa7; }
 
 .container { 
   max-width: 1400px;
@@ -40,8 +47,8 @@ a { color: #ffefa7; }
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  width: 80px;
-  height: 80px;
+  width: calc(40px + 2vmin);
+  height: calc(40px + 2vmin);
   margin-left: auto;
   animation: logo-spin infinite 20s linear;
 }
@@ -49,7 +56,6 @@ a { color: #ffefa7; }
 .App {
   min-height: 98vh;
   overflow: hidden;
-  /* border: 1px solid salmon; */
 }
 
 .App-body {
@@ -64,13 +70,27 @@ button:disabled {
   cursor: not-allowed;  
 }
 
+.fa-film {
+  color: #FFF;
+}
+
 .horizontal-list {
   display: flex;
   flex-wrap: wrap;
+  padding: 6px 0;
 }
-.horizontal-list div { padding: 8px; }
+.horizontal-list div { margin-right: 12px; padding-right: 8px; border-right: 2px solid #a77146; }
+.horizontal-list div:last-child { margin-right: 0; }
 a {
+  color: #ffefa7;
   text-decoration: none !important;
+}
+
+a:hover {
+  display: block;
+  color: #e4d17e;
+  max-width: 200px;
+  transform: scale(1.05);
 }
 
 .errors {
@@ -83,6 +103,7 @@ a {
 .font-header {
   font-weight: bold;
   margin-bottom: 12px;
+  font-family: 'Oswald', sans-serif;
 }
 
 .text-white {
@@ -92,7 +113,8 @@ a {
   text-align: center;
 }
 .center {
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .loader {
@@ -131,6 +153,7 @@ a {
 /* Small screens less than 720px */
 @media screen and (max-width: 720px) {
   .container { max-width: none; padding-left: 0; padding-right: 0; }
+  nav { padding: 1em 12px;}
   .hide-sm { display: none; }
   .show-md { display: none; }
 }

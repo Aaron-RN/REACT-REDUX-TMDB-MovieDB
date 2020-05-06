@@ -62,7 +62,7 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
     )
     : (
       <div>
-        <div className="text-center font-header">Movies sorted by {searchBy}</div>
+        <div className="text-center">Movies sorted by {searchBy}</div>
         <div className="pagination">
           <button type="button"
             title="Previous 20 movies"

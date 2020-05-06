@@ -18,19 +18,20 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav className="container">
-          <ul>
-            <div className="horizontal-list">
-              <div><Link to="/movies/popular">Popular<i className="fas fa-film"></i></Link></div>
-              <div><Link to="/movies/top_rated">Top Rated<i className="fas fa-film"></i></Link></div>
-              <div><Link to="/movies/upcoming">Upcoming<i className="fas fa-film"></i></Link></div>
-              <div><Link to="/movies/now_playing">Recent<i className="fas fa-film"></i></Link></div>
+        <nav className="center">
+          <div className="container">
+            <div className="font-header">TMDB API</div>
+            <div>
+              <div className="horizontal-list">
+                <div><Link to="/movies/popular">Popular <i className="fas fa-film"></i></Link></div>
+                <div><Link to="/movies/top_rated">Top Rated <i className="fas fa-film"></i></Link></div>
+                <div><Link to="/movies/upcoming">Upcoming <i className="fas fa-film"></i></Link></div>
+                <div><Link to="/movies/now_playing">Recent <i className="fas fa-film"></i></Link></div>
+              </div>
+              <div className=""><Link to="/genres">Show Genres</Link></div>
             </div>
-            <li>
-              <Link to="/genres">Genres</Link>
-            </li>
-          </ul>
-          <div className="logo" />
+            <div className="logo" />
+          </div>
         </nav>
         <main className="App-body">
           <Switch>

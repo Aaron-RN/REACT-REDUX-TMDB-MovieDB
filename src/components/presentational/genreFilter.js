@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import '../assets/css/genreFilter.css';
+import '../../assets/css/genreFilter.css';
 
 const GenreFilter = ({
   changeFilter, genres, filterSelected,
@@ -15,8 +15,12 @@ const GenreFilter = ({
   }, [filterSelected]);
 
   return (
-    <div>
-      <select ref={selectGenre} name="category" placeholder="Category" onChange={() => changeFilter(selectGenre.current.value)}>
+    <div className="genre-filter">
+      <select
+        ref={selectGenre}
+        name="category"
+        onChange={() => changeFilter(selectGenre.current.value)}
+      >
         {allGenres.map(genre => (
           <option key={genre.id + genre.name} value={genre.id}>{genre.name}</option>
         ))}

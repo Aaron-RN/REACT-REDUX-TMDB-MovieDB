@@ -7,16 +7,18 @@
   overflow-x: scroll;
   padding: 12px;
   -ms-overflow-style: none;
+  background-color: #191d27;
 }
 .movies-section::-webkit-scrollbar {
   display: none;
 }
 
-.pagination { text-align: center; }
+.pagination { text-align: center; margin-top: 12px; }
 .pagination div { display: inline-block; }
 .pagination button {
   display: inline-block;
-  padding: 8px;
+  font-size: 16px;
+  padding: 8px 16px;
   background-color: rgba(0, 0, 0, 0.8);
   border: 1px solid black;
   border-radius: 0.2em;
