@@ -3,7 +3,7 @@ import axios from 'axios';
 require('dotenv').config();
 
 const URL = 'https://api.themoviedb.org/3/';
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.APP_API_KEY || process.env.REACT_APP_API_KEY;
 const API_GET_GENRES = 'genre/movie/list';
 const API_GET_MOVIE_POPULAR = 'movie/popular';
 const API_GET_MOVIE_TOP_RATED = 'movie/top_rated';
