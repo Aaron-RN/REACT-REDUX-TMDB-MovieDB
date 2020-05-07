@@ -2,7 +2,7 @@
 Microverse Capstone project
 Web based Application using TMDB API to gather and manipulate information on various movies.
 
-![screenshot](./screenshot.png)
+![screenshot](./screenshot.jpg)
 
 ## [Live Link](https://arn-tmdb-movies.netlify.app/)
 
