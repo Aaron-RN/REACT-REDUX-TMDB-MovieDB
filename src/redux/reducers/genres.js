@@ -1,4 +1,4 @@
-import {FETCH_GENRES } from '../actions/index';
+import { FETCH_GENRES } from '../actions/index';
 
 const genresReducer = (state = [], action) => {
   switch (action.type) {
