@@ -11,7 +11,7 @@ const moviesReducer = (state = { }, action) => {
         searchBy: action.searchBy,
         genreIDs: action.genreIDS,
         results: [...action.response.results],
-      }
+      };
     default:
       return state;
   }

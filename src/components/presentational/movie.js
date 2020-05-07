@@ -12,15 +12,17 @@ const Movie = ({ movie, movieDetails }) => {
   const selectionText = React.useRef(null);
 
   return (
-    <div ref={selectedMovie}
+    <button
+      type="button"
+      ref={selectedMovie}
       className="movie"
-      onClick={ () => {movieDetails(selectedMovie, selectionText, movie)}}
+      onClick={() => movieDetails(selectedMovie, selectionText, movie)}
     >
       <div className="poster-container">
-        <div className="bg" title={showTitle} style={{backgroundImage: imageToUse}}></div>
+        <div className="bg" title={showTitle} style={{ backgroundImage: imageToUse }} />
       </div>
       <div ref={selectionText} className="selectionText hide">Tap Here for Movie Details</div>
-    </div>
+    </button>
   );
 };
 
@@ -29,6 +31,7 @@ Movie.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     author: PropTypes.string,
+    poster_path: PropTypes.string,
     genre_ids: PropTypes.instanceOf(Array),
   }).isRequired,
   movieDetails: PropTypes.func.isRequired,

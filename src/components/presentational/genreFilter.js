@@ -31,10 +31,10 @@ const GenreFilter = ({
 
 GenreFilter.propTypes = {
   genres: PropTypes.instanceOf(Array).isRequired,
-  filter:  PropTypes.oneOfType([
+  filterSelected: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number
-  ]),
+    PropTypes.number,
+  ]).isRequired,
   changeFilter: PropTypes.func.isRequired,
 };
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 require('dotenv').config();
 
 const URL = 'https://api.themoviedb.org/3/';
@@ -8,12 +9,12 @@ const API_GET_MOVIE_POPULAR = 'movie/popular';
 const API_GET_MOVIE_TOP_RATED = 'movie/top_rated';
 const API_GET_MOVIE_UPCOMING = 'movie/upcoming';
 const API_GET_MOVIE_IN_THEATRES = 'movie/now_playing';
-const API_GET_MOVIE_SIMILAR = movie_id => `movie/${movie_id}/similar`;
+const API_GET_MOVIE_SIMILAR = movieID => `movie/${movieID}/similar`;
 const API_GET_MOVIE_BY = 'discover/movie';
 
 const API_PARAMS_LANG_EN = '&language=en-US';
 const API_PARAMS_PAGE = '&page=';
-const API_PARAMS_GENRE = '&with_genres='
+const API_PARAMS_GENRE = '&with_genres=';
 
 const FETCH_REQUEST = 'FETCH_REQUEST';
 const FETCH_REQUEST_SUCCESS = 'FETCH_REQUEST_SUCCESS';
@@ -71,13 +72,13 @@ const refreshModal = selectedObject => ({
 // Asyncronous Requests to Backend API
 
 // MovieList Populate List
-const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = 'Popularity', page = '1', genre_ids = []) => dispatch => {
-  const genreParams = genre_ids ? `${API_PARAMS_GENRE}${genre_ids.join('%2C')}` : '';
+const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = 'Popularity', page = '1', genreIDs = []) => dispatch => {
+  const genreParams = genreIDs ? `${API_PARAMS_GENRE}${genreIDs.join('%2C')}` : '';
   dispatch(fetchRequest());
   axios.get(`${URL}${API_GET_MOVIE_BY}${API_KEY}${API_PARAMS_LANG_EN}${API_PARAMS_PAGE}${page}${genreParams}`)
     .then(response => {
       dispatch(fetchRequestSuccess(response.statusText));
-      dispatch(fetchMovieListSuccess(response.data, API_GET_MOVIE_BY, searchBy, genre_ids));
+      dispatch(fetchMovieListSuccess(response.data, API_GET_MOVIE_BY, searchBy, genreIDs));
     })
     .catch(error => {
       dispatch(fetchRequestFailure(error.response.data.status_message));
@@ -116,6 +117,6 @@ export {
   TOGGLE_MODAL, REFRESH_MODAL,
   API_GET_MOVIE_POPULAR, API_GET_MOVIE_TOP_RATED, API_GET_MOVIE_UPCOMING,
   API_GET_MOVIE_IN_THEATRES, API_GET_MOVIE_BY,
-  changeFilter, fetchMovieListBy, fetchSimilarMovies, fetchGenres, 
+  changeFilter, fetchMovieListBy, fetchSimilarMovies, fetchGenres,
   toggleModal, refreshModal,
 };

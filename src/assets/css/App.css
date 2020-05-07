@@ -93,7 +93,7 @@ a {
 a:hover {
   display: block;
   color: #e4d17e;
-  max-width: 200px;
+  max-width: 240px;
   transform: scale(1.05);
 }
 
