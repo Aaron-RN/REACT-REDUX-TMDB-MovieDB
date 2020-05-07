@@ -48,7 +48,13 @@ const MovieList = (
   const nextPage = (page + 1) > total_pages ? total_pages : (page + 1);
 
   const scrollHorizontal = event => {
-    moviesContainer.current.scrollLeft += event.deltaY;
+    const isFirefox = window.navigator.userAgent.search('Firefox');
+
+    if (isFirefox > 0) {
+      moviesContainer.current.scrollLeft += event.deltaY * 32;
+    } else {
+      moviesContainer.current.scrollLeft += event.deltaY;
+    }
   };
   const scrollOnHover = element => {
     element.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
@@ -61,17 +67,12 @@ const MovieList = (
       selectedMovie.textElement.classList.add('hide');
     }
     if (movie.title !== selectedMovie.title) {
-      // const newMovie = Object.assign(movie, {
-      //   element: element.current,
-      //   textElement: textElement.current,
-      // });
-      selectMovie(
-        {
-          ...movie,
-          element: element.current,
-          textElement: textElement.current,
-        },
-      );
+      const objectProps = {
+        element: element.current,
+        textElement: textElement.current,
+      };
+      const newMovie = Object.assign(movie, objectProps);
+      selectMovie(newMovie);
     } else {
       gotoMoviePage(true);
     }

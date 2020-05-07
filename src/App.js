@@ -19,8 +19,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav className="center">
-          <div className="container">
+        <nav>
+          <div className="center container">
             <div className="font-header">TMDB API</div>
             <div>
               <div className="horizontal-list">
