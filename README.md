@@ -2,9 +2,12 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/354b88dd-844d-4641-af74-41be58708c52/deploy-status)](https://app.netlify.com/sites/arn-tmdb-movies/deploys)
 
 Microverse Capstone project
+
 Web based Application using TMDB API to gather and manipulate information on various movies.
 
 ![screenshot](./screenshot.jpg)
+![desktopGif](./desktopgif.gif)
+![phoneGif](./phonegif.gif)
 
 ## [Live Link](https://arn-tmdb-movies.netlify.app/)
 
@@ -29,7 +32,7 @@ $ npm install
 ### Run Application
 
 ```
-$ npm run start
+$ npm run server
 ```
 
 ## Author
