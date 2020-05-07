@@ -1,0 +1,64 @@
+.genre-list {
+  margin-top: 1em;
+}
+.genre-list .header {
+  padding: 0.6em;
+  font-size: 28px;
+}
+
+.selected-genres {
+  padding: 12px;
+  border: 1px solid #FFF;
+  border-top: 1px solid #333;
+  border-radius: 0.25em;
+  margin-bottom: 1em;
+}
+
+.genres-flex {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.4em;
+  justify-content: center;
+}
+
+.genres-flex .genre {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: #fff7ca;
+  padding: 8px 12px;
+  border: 2px solid #ff7b00;
+  border-radius: 1em 0.25em;
+  background-color: #ff7b00;
+  margin-top: 0.6em;
+  margin-right: 0.6em;
+}
+.genres-flex .genre:hover {
+  transform: scale(1.1);
+}
+
+.genre-list .genre-search {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: #fff7ca;
+  padding: 8px 12px;
+  border: 2px solid #ff7b00;
+  border-radius: 0.8em;
+  background-color: transparent;
+  margin: 1.4em auto;
+}
+
+/* Small screens less than 720px */
+@media screen and (max-width: 720px) {
+  .genre-list .genre-search {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Medium devices (landscape tablets, 720px - 1024px) */
+@media only screen and (min-width: 721px) and (max-width: 1023px) {
+
+}

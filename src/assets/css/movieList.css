@@ -1,0 +1,38 @@
+.movies-section {
+  position: relative;
+  /* display: flex; */
+  white-space: nowrap;
+  width: 100vw;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 12px;
+  -ms-overflow-style: none;
+  background-color: #191d27;
+}
+.movies-section::-webkit-scrollbar {
+  display: none;
+}
+
+.pagination { text-align: center; margin-top: 12px; }
+.pagination div { display: inline-block; }
+.pagination button {
+  display: inline-block;
+  font-size: 16px;
+  padding: 8px 16px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid black;
+  border-radius: 0.2em;
+}
+
+.pagination button:nth-child(1) {
+  color: #b3b3b3;
+  margin-right: 12px;
+}
+
+.pagination div:nth-child(2) {
+  margin-right: 12px;
+}
+
+.pagination button:nth-child(3) {
+  color: #ffffff;
+}

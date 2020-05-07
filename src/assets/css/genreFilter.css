@@ -1,0 +1,11 @@
+.genre-filter {
+  font-size: 14px;
+  text-align: center;
+  padding: 16px;
+}
+
+.genre-filter select {
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 0.25em;
+}
