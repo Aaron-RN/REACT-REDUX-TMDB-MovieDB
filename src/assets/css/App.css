@@ -79,8 +79,14 @@ button:disabled {
   flex-wrap: wrap;
   padding: 6px 0;
 }
-.horizontal-list div { margin-right: 12px; padding-right: 8px; border-right: 2px solid #a77146; }
+.horizontal-list div { 
+  margin-right: 12px;
+  padding-right: 8px;
+  border-right: 2px solid #a77146;
+  font-size: 22px;
+}
 .horizontal-list div:last-child { margin-right: 0; border-right: 0;}
+.nav-link { font-size: 22px; }
 a {
   color: #ffefa7;
   text-decoration: none !important;

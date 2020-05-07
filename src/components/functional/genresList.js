@@ -24,10 +24,10 @@ const GenreList = ({ genres, status, fetchMovieListBy }) => {
 
   const renderMain =
     (
-      <div className="genre-list container">
-        <div>Select all genres you want to search for...</div>
-        <div className="selected-genres">{selectedGenres.map( g => g.name).join(', ')}</div>
-        <div className="horizontal-list">
+      <div className="genre-list container center">
+        <div className="header">Select all genres you want to search for...</div>
+        <div className="selected-genres">{selectedGenres.map( g => g.name).join(' | ')}</div>
+        <div className="genres-flex">
           {genres.map( genre => (
             <button
               type="button"
@@ -39,7 +39,7 @@ const GenreList = ({ genres, status, fetchMovieListBy }) => {
             </button>
           ))}
         </div>
-        <button type="button">
+        <button type="button" className="genre-search">
           <Link to={{
             pathname: '/movies/genres',
             route_state: {

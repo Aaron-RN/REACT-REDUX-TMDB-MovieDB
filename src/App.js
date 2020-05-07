@@ -28,7 +28,7 @@ function App() {
                 <div><Link to="/movies/upcoming">Upcoming <i className="fas fa-film"></i></Link></div>
                 <div><Link to="/movies/now_playing">Recent <i className="fas fa-film"></i></Link></div>
               </div>
-              <div className=""><Link to="/genres">Show Genres</Link></div>
+              <div className="nav-link"><Link to="/genres">Show Genres</Link></div>
             </div>
             <div className="logo" />
           </div>
