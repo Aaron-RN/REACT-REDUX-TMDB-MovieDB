@@ -35,13 +35,13 @@ const MoviePage = ({ match, genres, movies }) => {
     const generateStars = (rating) => {
       const roundedRating = roundTo(rating, 0.5);
       const noStar = key => (
-        <div key={key + 'nostart'} className="star"><i class="far fa-star"></i></div>
+        <div key={key + 'nostart'} className="star"><i className="far fa-star"></i></div>
       );
       const star = key => (
-        <div key={key + 'star'} className="star"><i class="fas fa-star"></i></div>
+        <div key={key + 'star'} className="star"><i className="fas fa-star"></i></div>
       );
       const halfStar = key => (
-        <div key={key + 'halfstar'} className="star"><i class="fas fa-star-half-alt"></i></div>
+        <div key={key + 'halfstar'} className="star"><i className="fas fa-star-half-alt"></i></div>
       );
       const starRating = (rating) => {
         const ratingElement = [];
@@ -92,7 +92,7 @@ const MoviePage = ({ match, genres, movies }) => {
                         searchBy: 'Similarity',
                       }
                     }}>
-                      Similar Movies...
+                      Find Similar Movies...
                     </Link>
                   </button>
                 </div>

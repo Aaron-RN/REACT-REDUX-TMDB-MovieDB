@@ -5,7 +5,7 @@
   overflow: hidden;
   width: 300px;
   height: 460px;
-  border: 1px solid #444;
+  border: 1px solid #333;
   box-shadow: 0px 12px 12px #1c181d;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,7 +90,7 @@
   width: 280px;
   height: 420px;
   margin-top: 0.4em;
-  border: 1px solid rgb(141, 141, 141);
+  border: 1px solid #333;
 }
 .title {
   font-size: 26px;
