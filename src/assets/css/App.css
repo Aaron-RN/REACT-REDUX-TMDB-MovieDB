@@ -80,7 +80,7 @@ button:disabled {
   padding: 6px 0;
 }
 .horizontal-list div { margin-right: 12px; padding-right: 8px; border-right: 2px solid #a77146; }
-.horizontal-list div:last-child { margin-right: 0; }
+.horizontal-list div:last-child { margin-right: 0; border-right: 0;}
 a {
   color: #ffefa7;
   text-decoration: none !important;
@@ -105,7 +105,13 @@ a:hover {
   margin-bottom: 12px;
   font-family: 'Oswald', sans-serif;
 }
-
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.mb-1 { margin-bottom: 0.4em; }
 .text-white {
   color: #FFF;
 }

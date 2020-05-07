@@ -48,7 +48,6 @@ const MovieList = ({ location, apiSearch, movies, genres, filter, status, fetchM
     }
     if (movie.title !== selectedMovie.title) { selectMovie({...movie, element: element.current, textElement: textElement.current}); }
     else {
-      console.log('should redirect');
       gotoMoviePage(true);
     }
   };
