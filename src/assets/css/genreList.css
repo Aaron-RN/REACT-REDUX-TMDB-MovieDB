@@ -18,6 +18,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0.4em;
+  justify-content: center;
 }
 
 .genres-flex .genre {
@@ -46,7 +47,7 @@
   border: 2px solid #ff7b00;
   border-radius: 0.8em;
   background-color: transparent;
-  margin: 1.4em 0.2em;
+  margin: 1.4em auto;
 }
 
 /* Small screens less than 720px */
