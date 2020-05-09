@@ -112,7 +112,7 @@
 }
 .star { display: inline; color: #e9b532; }
 .review-count { padding: 8px 0; }
-
+.vote-average { font-size: 20px; margin-left: 1em; }
 .movie-page button {
   display: block;
   font-family: 'Oswald', sans-serif;

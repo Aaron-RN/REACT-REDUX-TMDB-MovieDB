@@ -79,13 +79,21 @@ const MoviePage = ({ match, genres, movies }) => {
               <div className="bg" title={showTitle} style={{ backgroundImage: imageToUse }} />
             </div>
             <div className="movie-data">
-              <div className="font-header">Rating:</div>
+              <div className="font-header">
+                Rating:
+                <span className="vote-average">
+                  {movie.vote_average}
+                  <span>/10</span>
+                </span>
+              </div>
               <div>
                 {generateStars(movie.vote_average)}
               </div>
               <div className="review-count mb-1">
-                {movie.vote_count}
-                <span> reviews</span>
+                <div>
+                  {movie.vote_count}
+                  <span> reviews</span>
+                </div>
               </div>
               <div className="font-header">Summary: </div>
               {movie.overview}
