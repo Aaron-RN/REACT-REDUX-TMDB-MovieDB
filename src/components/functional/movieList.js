@@ -22,8 +22,9 @@ const MovieList = (
     if (selectedMovie.element) {
       selectedMovie.element.classList.toggle('selected');
       selectedMovie.textElement.classList.toggle('hide');
-      return;
     }
+  }, [selectedMovie]);
+  useEffect(() => {
     if (apiSearchQuery.searchBy === 'Similarity') {
       fetchSimilarMovies(apiSearchQuery.movieID);
     } else {
@@ -31,7 +32,7 @@ const MovieList = (
     }
   }, [
     apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID,
-    apiSearchQuery.searchBy, fetchMovieListBy, fetchSimilarMovies, selectedMovie,
+    apiSearchQuery.searchBy, fetchMovieListBy, fetchSimilarMovies,
   ]);
 
   const filteredMovies = (filter !== 'All')

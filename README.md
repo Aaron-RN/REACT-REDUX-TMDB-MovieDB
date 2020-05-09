@@ -25,13 +25,7 @@ Web based Application using TMDB API to gather and manipulate information on var
 
 ### Clone Repository
 
-Grab a clone of this repository from this Github
-
-### Install Dependencies
-
-```
-$ npm install
-```
+Grab a clone of [this repository](https://github.com/Aaron-RN/REACT-REDUX-TMDB-MovieDB/tree/v1.0) from Github
 
 ### Obtain API Key
 
@@ -39,8 +33,14 @@ In order for this application to work you will have to obtain an API key from TM
 
 1. Go to [TMDB](https://www.themoviedb.org/documentation/api) sign up and follow the provided instructions to request for an API Key
 2. After you have obtained your API key you will go into the redux/actions/ folder and open the index.js file there
-3. On line 6 where you would see const ```API_KEY = process.env.REACT_APP_API_KEY;```, ```replace process.env.REACT_APP_API_KEY``` with the key that you obtained from [TMDB](https://www.themoviedb.org/documentation/api)
+3. On line 6 where you would see const ```API_KEY = process.env.REACT_APP_API_KEY;```, replace ```process.env.REACT_APP_API_KEY``` with the key that you obtained from [TMDB](https://www.themoviedb.org/documentation/api)
 4. (Optional) Instead of replacing the code on line 6 you could create a .env.local file within the project's root directory and then within this file you would define your API key under the same name as so: ```REACT_APP_API_KEY="<ENTER YOUR API KEY HERE>"```
+
+### Install Dependencies
+
+```
+$ npm install
+```
 
 ### Run Application
 
