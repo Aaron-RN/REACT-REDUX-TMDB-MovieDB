@@ -37,10 +37,10 @@ $ npm install
 
 In order for this application to work you will have to obtain an API key from TMDB and either produce your own .env file or simply swap out the code in the redux/actions/index.js
 
-- Go to [TMDB](https://www.themoviedb.org/documentation/api) sign up and follow the provided instructions to request for an API Key
-- After you have obtained your API key you will go into the redux/actions/ folder and open the index.js file there
-- On line 6 where you would see const ```API_KEY = process.env.REACT_APP_API_KEY;```, ```replace process.env.REACT_APP_API_KEY``` with the key that you obtained from [TMDB](https://www.themoviedb.org/documentation/api)
-- (Optional) Instead of replacing the code on line 6 you could create a .env.local file within the project's root directory and then within this file you would define your API key under the same name as so: ```REACT_APP_API_KEY="<ENTER YOUR API KEY HERE>"```
+1. Go to [TMDB](https://www.themoviedb.org/documentation/api) sign up and follow the provided instructions to request for an API Key
+2. After you have obtained your API key you will go into the redux/actions/ folder and open the index.js file there
+3. On line 6 where you would see const ```API_KEY = process.env.REACT_APP_API_KEY;```, ```replace process.env.REACT_APP_API_KEY``` with the key that you obtained from [TMDB](https://www.themoviedb.org/documentation/api)
+4. (Optional) Instead of replacing the code on line 6 you could create a .env.local file within the project's root directory and then within this file you would define your API key under the same name as so: ```REACT_APP_API_KEY="<ENTER YOUR API KEY HERE>"```
 
 ### Run Application
 
