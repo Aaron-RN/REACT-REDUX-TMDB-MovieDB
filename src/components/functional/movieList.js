@@ -91,7 +91,7 @@ const MovieList = (
       <div>
         <div className="text-center">
           <span>
-            Movies sorted by &nbsp;
+            Movies sorted by&nbsp;
             {searchBy}
           </span>
         </div>
