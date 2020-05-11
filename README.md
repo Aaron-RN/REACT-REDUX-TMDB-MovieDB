@@ -21,7 +21,7 @@ Web based Application using TMDB API to gather and manipulate information on var
 - Redux-Thunk
 - NPM Webpack
 
-Tested Compatibility with the latest versions of 
+### Tested Compatibility with the latest versions of 
 - Firefox(Version: 76.0.1 (64-bit)), 
 - Chrome(Version: 81.0.4044.138 (Official Build) (64-bit)), 
 - Opera(Version: 68.0.3618.63) and 
