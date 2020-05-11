@@ -90,8 +90,10 @@ const MovieList = (
     : (
       <div>
         <div className="text-center">
-          <span>Movies sorted by </span>
-          {searchBy}
+          <span>
+            Movies sorted by &nbsp;
+            {searchBy}
+          </span>
         </div>
         <div className="pagination">
           <button

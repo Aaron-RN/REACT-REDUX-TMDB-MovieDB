@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { parse, stringify } from 'flatted/esm';
+import { parse, stringify } from 'flatted';
 import '../../assets/css/movie.css';
 import noPoster from '../../assets/images/no_poster_image.jpg';
 
@@ -31,6 +31,21 @@ const MoviePage = ({ match, genres, movies }) => {
     const showTitle = movie.poster_path === null ? movie.title : '';
     const backdropImage = `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
     const movieGenres = nGenres.filter(g => movie.genre_ids.includes(g.id)).map(g => g.name);
+
+    const commaSeparatedNumericValues = num => {
+      const numToString = num.toString();
+      let newString = '';
+      let count = 0;
+      for (let i = numToString.length - 1; i >= 0; i -= 1) {
+        newString = `${numToString[i]}${newString}`;
+        count += 1;
+        if (count === 3 && i !== 0) {
+          newString = `,${newString}`;
+          count = 0;
+        }
+      }
+      return newString.trim();
+    };
 
     const roundTo = (x, precision) => {
       const y = +x + (precision === undefined ? 0.5 : precision / 2);
@@ -70,8 +85,10 @@ const MoviePage = ({ match, genres, movies }) => {
             <div className="title font-header">{movie.title}</div>
             <div className="category font-header">{movieGenres.join(' | ')}</div>
             <div className="date">
-              <span>Release Date: </span>
-              {movie.release_date}
+              <span>
+                Release Date: &nbsp;
+                {movie.release_date}
+              </span>
             </div>
           </div>
           <div className="flex-row">
@@ -83,7 +100,7 @@ const MoviePage = ({ match, genres, movies }) => {
                 Rating:
                 <span className="vote-average">
                   {movie.vote_average}
-                  <span>/10</span>
+                  /10
                 </span>
               </div>
               <div>
@@ -91,8 +108,8 @@ const MoviePage = ({ match, genres, movies }) => {
               </div>
               <div className="review-count mb-1">
                 <div>
-                  {movie.vote_count}
-                  <span> reviews</span>
+                  {commaSeparatedNumericValues(movie.vote_count)}
+                  &nbsp;reviews
                 </div>
               </div>
               <div className="font-header">Summary: </div>
