@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { parse, stringify } from 'flatted';
+import { commaSeparatedNumericValues, roundTo } from '../misc/numberFunctions';
 import '../../assets/css/movie.css';
 import noPoster from '../../assets/images/no_poster_image.jpg';
 
@@ -31,26 +32,6 @@ const MoviePage = ({ match, genres, movies }) => {
     const showTitle = movie.poster_path === null ? movie.title : '';
     const backdropImage = `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
     const movieGenres = nGenres.filter(g => movie.genre_ids.includes(g.id)).map(g => g.name);
-
-    const commaSeparatedNumericValues = num => {
-      const numToString = num.toString();
-      let newString = '';
-      let count = 0;
-      for (let i = numToString.length - 1; i >= 0; i -= 1) {
-        newString = `${numToString[i]}${newString}`;
-        count += 1;
-        if (count === 3 && i !== 0) {
-          newString = `,${newString}`;
-          count = 0;
-        }
-      }
-      return newString.trim();
-    };
-
-    const roundTo = (x, precision) => {
-      const y = +x + (precision === undefined ? 0.5 : precision / 2);
-      return y - (y % (precision === undefined ? 1 : +precision));
-    };
 
     const generateStars = rating => {
       const roundedRating = roundTo(rating, 0.5);
