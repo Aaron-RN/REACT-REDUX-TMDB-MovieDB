@@ -48,6 +48,12 @@ $ npm install
 $ npm run server
 ```
 
+### Running Tests
+
+```
+$ npm run test
+```
+
 ## Author
 
 👤 **Aaron Rory**
