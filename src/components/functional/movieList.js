@@ -22,8 +22,9 @@ const MovieList = (
     if (selectedMovie.element) {
       selectedMovie.element.classList.toggle('selected');
       selectedMovie.textElement.classList.toggle('hide');
-      return;
     }
+  }, [selectedMovie]);
+  useEffect(() => {
     if (apiSearchQuery.searchBy === 'Similarity') {
       fetchSimilarMovies(apiSearchQuery.movieID);
     } else {
@@ -31,7 +32,7 @@ const MovieList = (
     }
   }, [
     apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID,
-    apiSearchQuery.searchBy, fetchMovieListBy, fetchSimilarMovies, selectedMovie,
+    apiSearchQuery.searchBy, fetchMovieListBy, fetchSimilarMovies,
   ]);
 
   const filteredMovies = (filter !== 'All')
@@ -48,7 +49,13 @@ const MovieList = (
   const nextPage = (page + 1) > total_pages ? total_pages : (page + 1);
 
   const scrollHorizontal = event => {
-    moviesContainer.current.scrollLeft += event.deltaY;
+    const isFirefox = window.navigator.userAgent.search('Firefox');
+
+    if (isFirefox > 0) {
+      moviesContainer.current.scrollLeft += event.deltaY * 32;
+    } else {
+      moviesContainer.current.scrollLeft += event.deltaY;
+    }
   };
   const scrollOnHover = element => {
     element.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
@@ -61,17 +68,12 @@ const MovieList = (
       selectedMovie.textElement.classList.add('hide');
     }
     if (movie.title !== selectedMovie.title) {
-      // const newMovie = Object.assign(movie, {
-      //   element: element.current,
-      //   textElement: textElement.current,
-      // });
-      selectMovie(
-        {
-          ...movie,
-          element: element.current,
-          textElement: textElement.current,
-        },
-      );
+      const objectProps = {
+        element: element.current,
+        textElement: textElement.current,
+      };
+      const newMovie = Object.assign(movie, objectProps);
+      selectMovie(newMovie);
     } else {
       gotoMoviePage(true);
     }
@@ -88,8 +90,10 @@ const MovieList = (
     : (
       <div>
         <div className="text-center">
-          <span>Movies sorted by </span>
-          {searchBy}
+          <span>
+            Movies sorted by&nbsp;
+            {searchBy}
+          </span>
         </div>
         <div className="pagination">
           <button

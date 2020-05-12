@@ -2,24 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { parse, stringify } from 'flatted';
+import { commaSeparatedNumericValues, roundTo } from '../misc/numberFunctions';
 import '../../assets/css/movie.css';
 import noPoster from '../../assets/images/no_poster_image.jpg';
+
 
 const MoviePage = ({ match, genres, movies }) => {
   let nMovies = movies;
   let nGenres = genres;
+
   if (typeof (Storage) !== 'undefined') {
-    if (movies.results.length === 0) {
-      nMovies = JSON.parse(localStorage.getItem('movies'));
+    if (nMovies.results.length === 0) {
+      nMovies = parse(localStorage.getItem('movies'));
       nGenres = JSON.parse(localStorage.getItem('genres'));
     }
   }
 
   let render;
-  if (movies.results.length > 0) {
+  if (nMovies.results.length > 0) {
     if (typeof (Storage) !== 'undefined') {
-      localStorage.setItem('movies', JSON.stringify(movies));
-      localStorage.setItem('genres', JSON.stringify(genres));
+      localStorage.setItem('movies', stringify(nMovies));
+      localStorage.setItem('genres', JSON.stringify(nGenres));
     }
     const movieIDParams = parseInt(match.params.id, 10);
     const movie = nMovies.results.filter(movie => movie.id === movieIDParams)[0];
@@ -28,11 +32,6 @@ const MoviePage = ({ match, genres, movies }) => {
     const showTitle = movie.poster_path === null ? movie.title : '';
     const backdropImage = `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
     const movieGenres = nGenres.filter(g => movie.genre_ids.includes(g.id)).map(g => g.name);
-
-    const roundTo = (x, precision) => {
-      const y = +x + (precision === undefined ? 0.5 : precision / 2);
-      return y - (y % (precision === undefined ? 1 : +precision));
-    };
 
     const generateStars = rating => {
       const roundedRating = roundTo(rating, 0.5);
@@ -67,8 +66,10 @@ const MoviePage = ({ match, genres, movies }) => {
             <div className="title font-header">{movie.title}</div>
             <div className="category font-header">{movieGenres.join(' | ')}</div>
             <div className="date">
-              <span>Release Date: </span>
-              {movie.release_date}
+              <span>
+                Release Date: &nbsp;
+                {movie.release_date}
+              </span>
             </div>
           </div>
           <div className="flex-row">
@@ -76,13 +77,21 @@ const MoviePage = ({ match, genres, movies }) => {
               <div className="bg" title={showTitle} style={{ backgroundImage: imageToUse }} />
             </div>
             <div className="movie-data">
-              <div className="font-header">Rating:</div>
+              <div className="font-header">
+                Rating:
+                <span className="vote-average">
+                  {movie.vote_average}
+                  /10
+                </span>
+              </div>
               <div>
                 {generateStars(movie.vote_average)}
               </div>
               <div className="review-count mb-1">
-                {movie.vote_count}
-                <span> reviews</span>
+                <div>
+                  {commaSeparatedNumericValues(movie.vote_count)}
+                  &nbsp;reviews
+                </div>
               </div>
               <div className="font-header">Summary: </div>
               {movie.overview}
