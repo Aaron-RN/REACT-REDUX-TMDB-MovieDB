@@ -9,7 +9,7 @@ Web based Application using TMDB API to gather and manipulate information on var
 ![desktopGif](./desktopgif.gif)
 ![phoneGif](./phonegif.gif)
 
-## [Live Link](https://arn-tmdb-movies.netlify.app/)
+## [Live Link](https://arn-tmdb-moviedb.herokuapp.com)
 
 ## Built With
 
