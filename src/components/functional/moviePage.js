@@ -103,6 +103,8 @@ const MoviePage = ({ match, genres, movies }) => {
               route_state: {
                 movieID: movie.id,
                 searchBy: 'Similarity',
+                page: '1',
+                resetPage: true,
               },
             }}
             >

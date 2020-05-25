@@ -9,7 +9,7 @@ import { fetchMovieListBy, fetchSimilarMovies, changeFilter } from '../../redux/
 
 const MovieList = (
   {
-    location, apiSearch, movies, genres, filter,
+    match, location, apiSearch, movies, genres, filter,
     status, fetchMovieListBy, fetchSimilarMovies, changeFilter,
   },
 ) => {
@@ -31,8 +31,8 @@ const MovieList = (
     }
   }, [selectedMovie]);
   useEffect(() => {
-    if (apiSearchQuery.searchBy === 'Similarity') {
-      fetchSimilarMovies(apiSearchQuery.movieID);
+    if (match.url.search(/similar/) !== -1) {
+      fetchSimilarMovies(match.params.id, 'Similarity', apiSearchQuery.page);
     } else {
       fetchMovieListBy(
         apiSearchQuery.apiURL,
@@ -167,6 +167,7 @@ MovieList.defaultProps = {
 };
 
 MovieList.propTypes = {
+  match: PropTypes.instanceOf(Object).isRequired,
   location: PropTypes.instanceOf(Object),
   movies: PropTypes.instanceOf(Object).isRequired,
   genres: PropTypes.instanceOf(Array).isRequired,
