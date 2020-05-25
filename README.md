@@ -62,6 +62,10 @@ $ npm run server
 $ npm run test
 ```
 
+### Future Features
+
+- Ability to seach for movies by title
+
 ## Author
 
 👤 **Aaron Rory**
