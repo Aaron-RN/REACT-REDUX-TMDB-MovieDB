@@ -17,6 +17,12 @@ const MovieList = (
   const [moviePage, gotoMoviePage] = useState(false);
 
   const apiSearchQuery = apiSearch || (location.route_state ? location.route_state : movies);
+  if (typeof (Storage) !== 'undefined') {
+    if (apiSearchQuery.resetPage) { localStorage.setItem('currentPage', JSON.stringify('1')); }
+    if (apiSearchQuery.page !== '1') {
+      apiSearchQuery.page = JSON.parse(localStorage.getItem('currentPage'));
+    }
+  }
 
   useEffect(() => {
     if (selectedMovie.element) {
@@ -28,11 +34,16 @@ const MovieList = (
     if (apiSearchQuery.searchBy === 'Similarity') {
       fetchSimilarMovies(apiSearchQuery.movieID);
     } else {
-      fetchMovieListBy(apiSearchQuery.apiURL, apiSearchQuery.searchBy, '1', apiSearchQuery.genreIDs);
+      fetchMovieListBy(
+        apiSearchQuery.apiURL,
+        apiSearchQuery.searchBy,
+        apiSearchQuery.page,
+        apiSearchQuery.genreIDs,
+      );
     }
   }, [
     apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID,
-    apiSearchQuery.searchBy, fetchMovieListBy, fetchSimilarMovies,
+    apiSearchQuery.searchBy, apiSearchQuery.page, fetchMovieListBy, fetchSimilarMovies,
   ]);
 
   const filteredMovies = (filter !== 'All')
@@ -46,7 +57,15 @@ const MovieList = (
   const moviesContainer = React.useRef(null);
   const prevPage = (page - 1) <= 0 ? 1 : (page - 1);
   // eslint-disable-next-line camelcase
-  const nextPage = (page + 1) > total_pages ? total_pages : (page + 1);
+  const nextPage = (page + 1) > total_pages ? total_pages : (parseInt(page, 10) + parseInt(1, 10));
+
+  const changePage = page => {
+    apiSearchQuery.resetPage = false;
+    if (typeof (Storage) !== 'undefined') {
+      localStorage.setItem('currentPage', JSON.stringify(page));
+    }
+    fetchMovieListBy(apiURL, searchBy, page, genreIDs);
+  };
 
   const scrollHorizontal = event => {
     const isFirefox = window.navigator.userAgent.search('Firefox');
@@ -99,7 +118,7 @@ const MovieList = (
           <button
             type="button"
             title="Previous 20 movies"
-            onClick={() => fetchMovieListBy(apiURL, searchBy, prevPage, genreIDs)}
+            onClick={() => changePage(prevPage)}
           >
             Prev
           </button>
@@ -111,7 +130,7 @@ const MovieList = (
           <button
             type="button"
             title="Next 20 movies"
-            onClick={() => fetchMovieListBy(apiURL, searchBy, nextPage, genreIDs)}
+            onClick={() => changePage(nextPage)}
           >
             Next
           </button>
