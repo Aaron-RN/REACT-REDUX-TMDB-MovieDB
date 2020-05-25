@@ -1,37 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { parse, stringify } from 'flatted';
 import { commaSeparatedNumericValues, roundTo } from '../misc/numberFunctions';
+import { fetchMovie } from '../../redux/actions/index';
 import '../../assets/css/movie.css';
 import noPoster from '../../assets/images/no_poster_image.jpg';
 
 
-const MoviePage = ({ match, genres, movies }) => {
-  let nMovies = movies;
-  let nGenres = genres;
+const MoviePage = ({
+  match, selectedMovie, fetchMovie,
+}) => {
+  const movieID = match.params.id;
 
-  if (typeof (Storage) !== 'undefined') {
-    if (nMovies.results.length === 0) {
-      nMovies = parse(localStorage.getItem('movies'));
-      nGenres = JSON.parse(localStorage.getItem('genres'));
-    }
-  }
+  useEffect(() => {
+    fetchMovie(match.params.id);
+  }, [match.params.id, fetchMovie]);
+
 
   let render;
-  if (nMovies.results.length > 0) {
-    if (typeof (Storage) !== 'undefined') {
-      localStorage.setItem('movies', stringify(nMovies));
-      localStorage.setItem('genres', JSON.stringify(nGenres));
-    }
-    const movieIDParams = parseInt(match.params.id, 10);
-    const movie = nMovies.results.filter(movie => movie.id === movieIDParams)[0];
-    const posterImage = `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`;
-    const imageToUse = movie.poster_path === null ? `url(${noPoster})` : posterImage;
-    const showTitle = movie.poster_path === null ? movie.title : '';
-    const backdropImage = `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
-    const movieGenres = nGenres.filter(g => movie.genre_ids.includes(g.id)).map(g => g.name);
+  if (selectedMovie.title) {
+    /* eslint-disable camelcase */
+    const {
+      poster_path, title, backdrop_path, genres,
+    } = selectedMovie;
+    const posterImage = `url(https://image.tmdb.org/t/p/w500${poster_path})`;
+    const imageToUse = poster_path === null ? `url(${noPoster})` : posterImage;
+    const showTitle = poster_path === null ? title : '';
+    const backdropImage = `url(https://image.tmdb.org/t/p/original${backdrop_path})`;
+    const movieGenres = genres.map(g => g.name);
+    /* eslint-enable no-unused-vars */
 
     const generateStars = rating => {
       const roundedRating = roundTo(rating, 0.5);
@@ -63,12 +61,12 @@ const MoviePage = ({ match, genres, movies }) => {
       <div className="movie-page" style={{ backgroundImage: backdropImage }}>
         <div className="desc center">
           <div className="desc-info">
-            <div className="title font-header">{movie.title}</div>
+            <div className="title font-header">{selectedMovie.title}</div>
             <div className="category font-header">{movieGenres.join(' | ')}</div>
             <div className="date">
               <span>
                 Release Date: &nbsp;
-                {movie.release_date}
+                {selectedMovie.release_date}
               </span>
             </div>
           </div>
@@ -80,28 +78,28 @@ const MoviePage = ({ match, genres, movies }) => {
               <div className="font-header">
                 Rating:
                 <span className="vote-average">
-                  {movie.vote_average}
+                  {selectedMovie.vote_average}
                   /10
                 </span>
               </div>
               <div>
-                {generateStars(movie.vote_average)}
+                {generateStars(selectedMovie.vote_average)}
               </div>
               <div className="review-count mb-1">
                 <div>
-                  {commaSeparatedNumericValues(movie.vote_count)}
-                  &nbsp;reviews
+                  {commaSeparatedNumericValues(selectedMovie.vote_count)}
+                    &nbsp;reviews
                 </div>
               </div>
               <div className="font-header">Summary: </div>
-              {movie.overview}
+              {selectedMovie.overview}
             </div>
           </div>
           <button type="button">
             <Link to={{
-              pathname: `/movies/${movie.id}/similar`,
+              pathname: `/movies/${movieID}/similar`,
               route_state: {
-                movieID: movie.id,
+                movieID,
                 searchBy: 'Similarity',
                 page: '1',
                 resetPage: true,
@@ -117,7 +115,7 @@ const MoviePage = ({ match, genres, movies }) => {
   } else {
     render = (
       <div className="error-page">
-        <h5>ERROR NO MOVIE FOUND</h5>
+        <h5>Sorry, Couldn&apos;t find that Movie</h5>
       </div>
     );
   }
@@ -127,13 +125,18 @@ const MoviePage = ({ match, genres, movies }) => {
 
 MoviePage.propTypes = {
   match: PropTypes.instanceOf(Object).isRequired,
-  movies: PropTypes.instanceOf(Object).isRequired,
-  genres: PropTypes.instanceOf(Object).isRequired,
+  selectedMovie: PropTypes.instanceOf(Object).isRequired,
+  fetchMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  movies: state.movies,
-  genres: state.genres,
+  selectedMovie: state.selectedMovie,
 });
 
-export default connect(mapStateToProps, null)(MoviePage);
+const mapDispatchToProps = dispatch => ({
+  fetchMovie: movieID => {
+    dispatch(fetchMovie(movieID));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

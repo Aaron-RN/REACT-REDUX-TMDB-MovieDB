@@ -11,6 +11,7 @@ const API_GET_MOVIE_UPCOMING = 'movie/upcoming';
 const API_GET_MOVIE_IN_THEATRES = 'movie/now_playing';
 const API_GET_MOVIE_SIMILAR = movieID => `movie/${movieID}/similar`;
 const API_GET_MOVIE_BY = 'discover/movie';
+const API_GET_MOVIE = movieID => `movie/${movieID}`;
 
 const API_PARAMS_LANG_EN = '&language=en-US';
 const API_PARAMS_PAGE = '&page=';
@@ -20,6 +21,7 @@ const FETCH_REQUEST = 'FETCH_REQUEST';
 const FETCH_REQUEST_SUCCESS = 'FETCH_REQUEST_SUCCESS';
 const FETCH_REQUEST_FAILURE = 'FETCH_REQUEST_FAILURE';
 const FETCH_MOVIELIST = 'FETCH_MOVIELIST';
+const FETCH_MOVIE = 'FETCH_MOVIE';
 const FETCH_GENRES = 'FETCH_GENRES';
 const CHANGE_FILTER = 'CHANGE_FILTER';
 const TOGGLE_MODAL = 'TOGGLE_MODAL';
@@ -46,6 +48,11 @@ const fetchMovieListSuccess = (movies, apiURL, searchBy, genreIDS) => ({
   apiURL,
   searchBy,
   genreIDS,
+});
+
+const fetchMovieSuccess = movies => ({
+  type: FETCH_MOVIE,
+  response: movies,
 });
 
 const fetchGenresSuccess = genres => ({
@@ -85,13 +92,26 @@ const fetchMovieListBy = (API_GET_MOVIE_BY = API_GET_MOVIE_POPULAR, searchBy = '
     });
 };
 
-// MovieList Populate List
+// MovieList Populate Similar Movies List
 const fetchSimilarMovies = (movieID, searchBy = 'Similarity', page = '1') => dispatch => {
   dispatch(fetchRequest());
   axios.get(`${URL}${API_GET_MOVIE_SIMILAR(movieID)}${API_KEY}${API_PARAMS_LANG_EN}${API_PARAMS_PAGE}${page}`)
     .then(response => {
       dispatch(fetchRequestSuccess(response.statusText));
       dispatch(fetchMovieListSuccess(response.data, API_GET_MOVIE_SIMILAR(movieID), searchBy));
+    })
+    .catch(error => {
+      dispatch(fetchRequestFailure(error.response.data.status_message));
+    });
+};
+
+// MoviePage Grab a Single Movie
+const fetchMovie = movieID => dispatch => {
+  dispatch(fetchRequest());
+  axios.get(`${URL}${API_GET_MOVIE(movieID)}${API_KEY}${API_PARAMS_LANG_EN}`)
+    .then(response => {
+      dispatch(fetchRequestSuccess(response.statusText));
+      dispatch(fetchMovieSuccess(response.data));
     })
     .catch(error => {
       dispatch(fetchRequestFailure(error.response.data.status_message));
@@ -112,11 +132,11 @@ const fetchGenres = () => dispatch => {
 };
 
 export {
-  CHANGE_FILTER, FETCH_MOVIELIST, FETCH_GENRES,
+  CHANGE_FILTER, FETCH_MOVIELIST, FETCH_MOVIE, FETCH_GENRES,
   FETCH_REQUEST, FETCH_REQUEST_SUCCESS, FETCH_REQUEST_FAILURE,
   TOGGLE_MODAL, REFRESH_MODAL,
   API_GET_MOVIE_POPULAR, API_GET_MOVIE_TOP_RATED, API_GET_MOVIE_UPCOMING,
   API_GET_MOVIE_IN_THEATRES, API_GET_MOVIE_BY,
-  changeFilter, fetchMovieListBy, fetchSimilarMovies, fetchGenres,
+  changeFilter, fetchMovieListBy, fetchSimilarMovies, fetchMovie, fetchGenres,
   toggleModal, refreshModal,
 };

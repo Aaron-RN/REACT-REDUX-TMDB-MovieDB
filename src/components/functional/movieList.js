@@ -43,7 +43,8 @@ const MovieList = (
     }
   }, [
     apiSearchQuery.apiURL, apiSearchQuery.genreIDs, apiSearchQuery.movieID,
-    apiSearchQuery.searchBy, apiSearchQuery.page, fetchMovieListBy, fetchSimilarMovies,
+    apiSearchQuery.searchBy, apiSearchQuery.page, fetchMovieListBy,
+    match.params.id, match.url, fetchSimilarMovies,
   ]);
 
   const filteredMovies = (filter !== 'All')

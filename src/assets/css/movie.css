@@ -130,6 +130,11 @@
   transform: scale(1.05);
 }
 
+.error-page {
+  text-align: center;
+  color: #a74545;
+}
+
 /* Small screens less than 720px */
 @media screen and (max-width: 720px) {
   .desc { padding-left: 0; padding-right: 0; }
